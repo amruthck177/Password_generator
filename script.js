@@ -62,16 +62,17 @@ function updateStrengthMeter(strength) {
 // Generate Password
 function generatePassword() {
     const length = +lengthSlider.value;
-    const hasUpper = uppercaseCb.checked;
-    const hasLower = lowercaseCb.checked;
-    const hasNumber = numbersCb.checked;
-    const hasSymbol = symbolsCb.checked;
+    let hasUpper = uppercaseCb.checked;
+    let hasLower = lowercaseCb.checked;
+    let hasNumber = numbersCb.checked;
+    let hasSymbol = symbolsCb.checked;
     
     let typesCount = hasUpper + hasLower + hasNumber + hasSymbol;
     
     if (typesCount === 0) {
         // If nothing is checked, default to lowercase
         lowercaseCb.checked = true;
+        hasLower = true;
         typesCount = 1;
     }
     
