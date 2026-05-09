@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>QuantumVault | Premium Password Generator</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div class="background-effects">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <div class="logo">
+                <i class="fa-solid fa-shield-halved"></i>
+                <h1>QuantumVault</h1>
+            </div>
+            <p>Generate highly secure, cryptographic passwords in an instant.</p>
+        </header>
+
+        <section class="generator-card glass-panel">
+            <div class="output-container">
+                <div class="password-display" id="passwordDisplay">
+                    <span class="placeholder">P@ssw0rd_W!ll_Ape@r_H3r3</span>
+                </div>
+                <button class="icon-btn" id="copyBtn" aria-label="Copy Password" title="Copy to clipboard">
+                    <i class="fa-regular fa-copy"></i>
+                </button>
+            </div>
+
+            <div class="strength-meter-container">
+                <div class="strength-meter">
+                    <div class="strength-bar" id="strengthBar"></div>
+                </div>
+                <span class="strength-text" id="strengthText">Weak</span>
+            </div>
+
+            <div class="controls-container">
+                <div class="length-control">
+                    <div class="length-header">
+                        <label for="lengthSlider">Character Length</label>
+                        <span class="length-value" id="lengthValue">16</span>
+                    </div>
+                    <input type="range" id="lengthSlider" min="8" max="64" value="16" class="slider">
+                </div>
+
+                <div class="options-grid">
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="uppercase" checked>
+                        <span class="checkmark"></span>
+                        <span class="label-text">Uppercase (A-Z)</span>
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="lowercase" checked>
+                        <span class="checkmark"></span>
+                        <span class="label-text">Lowercase (a-z)</span>
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="numbers" checked>
+                        <span class="checkmark"></span>
+                        <span class="label-text">Numbers (0-9)</span>
+                    </label>
+                    <label class="checkbox-container">
+                        <input type="checkbox" id="symbols" checked>
+                        <span class="checkmark"></span>
+                        <span class="label-text">Symbols (!@#$%)</span>
+                    </label>
+                </div>
+            </div>
+
+            <button class="primary-btn generate-btn" id="generateBtn">
+                <span>Generate Password</span>
+                <i class="fa-solid fa-bolt"></i>
+            </button>
+        </section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
