@@ -19,7 +19,8 @@ const elements = {
         document.getElementById('seg1'),
         document.getElementById('seg2'),
         document.getElementById('seg3'),
-        document.getElementById('seg4')
+        document.getElementById('seg4'),
+        document.getElementById('seg5')
     ],
     historyPanel: document.getElementById('historyPanel'),
     historyHeader: document.getElementById('historyHeader'),
@@ -35,8 +36,8 @@ const charSets = {
     symbol: '!@#$%^&*()_+~`|}{[]:;?><,./-='
 };
 
-const strengthColors = ['var(--strength-1)', 'var(--strength-2)', 'var(--strength-3)', 'var(--strength-4)'];
-const strengthLabels = ['Weak', 'Fair', 'Strong', 'Very Strong'];
+const strengthColors = ['var(--strength-1)', 'var(--strength-2)', 'var(--strength-3)', 'var(--strength-4)', 'var(--strength-5)'];
+const strengthLabels = ['Easy', 'Simple', 'Moderate', 'Strong', 'Very Strong'];
 
 let passwordHistory = [];
 
@@ -109,10 +110,11 @@ function calculateStrength(length) {
     elements.entropyBadge.textContent = `${entropy} bits`;
     
     let level = 0;
-    if (entropy < 40) level = 1;
-    else if (entropy < 60) level = 2;
-    else if (entropy < 80) level = 3;
-    else level = 4;
+    if (entropy < 35) level = 1;
+    else if (entropy < 55) level = 2;
+    else if (entropy < 75) level = 3;
+    else if (entropy < 100) level = 4;
+    else level = 5;
     
     // Update segments
     elements.segments.forEach((seg, index) => {
