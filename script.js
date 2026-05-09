@@ -23,6 +23,7 @@ const elements = {
     ],
     historyPanel: document.getElementById('historyPanel'),
     historyHeader: document.getElementById('historyHeader'),
+    clearHistoryBtn: document.getElementById('clearHistoryBtn'),
     historyList: document.getElementById('historyList'),
     rippleContainer: document.getElementById('rippleContainer')
 };
@@ -77,8 +78,16 @@ elements.generateBtn.addEventListener('click', function(e) {
 });
 
 // History Panel Toggle
-elements.historyHeader.addEventListener('click', () => {
+elements.historyHeader.addEventListener('click', (e) => {
+    if (e.target.closest('#clearHistoryBtn')) return;
     elements.historyPanel.classList.toggle('open');
+});
+
+// Clear History Button
+elements.clearHistoryBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    passwordHistory = [];
+    renderHistory();
 });
 
 // Calculate Entropy and Update UI
