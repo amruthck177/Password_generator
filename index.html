@@ -3,80 +3,125 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>QuantumVault | Premium Password Generator</title>
+    <title>Stellar Password Generator</title>
     <link rel="stylesheet" href="style.css">
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;800&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div id="starfield" class="starfield"></div>
     <div class="background-effects">
-        <div class="blob blob-1"></div>
-        <div class="blob blob-2"></div>
+        <div class="orb orb-1"></div>
+        <div class="orb orb-2"></div>
+        <div class="orb orb-3"></div>
     </div>
 
     <main class="container">
         <header>
-            <div class="logo">
-                <i class="fa-solid fa-shield-halved"></i>
-                <h1>QuantumVault</h1>
+            <div class="header-content">
+                <i class="fa-solid fa-lock header-icon" id="lockIcon"></i>
+                <h1>StellarGen</h1>
             </div>
-            <p>Generate highly secure, cryptographic passwords in an instant.</p>
+            
+            <div class="magic-mode-toggle">
+                <span class="magic-label"><i class="fa-solid fa-wand-magic-sparkles"></i> Magic Mode</span>
+                <label class="switch">
+                    <input type="checkbox" id="magicModeToggle">
+                    <span class="slider-toggle round"></span>
+                </label>
+            </div>
         </header>
 
         <section class="generator-card glass-panel">
-            <div class="output-container">
+            <div class="output-container" id="outputContainer">
                 <div class="password-display" id="passwordDisplay">
-                    <span class="placeholder">P@ssw0rd_W!ll_Ape@r_H3r3</span>
+                    <span class="placeholder">Awaiting Sequence...</span>
                 </div>
-                <button class="icon-btn" id="copyBtn" aria-label="Copy Password" title="Copy to clipboard">
-                    <i class="fa-regular fa-copy"></i>
+                <div class="shimmer" id="shimmerEffect"></div>
+                <button class="icon-btn" id="copyBtn" aria-label="Copy Password">
+                    <div class="copy-icon-container">
+                        <i class="fa-regular fa-copy front"></i>
+                        <i class="fa-solid fa-check back text-green"></i>
+                    </div>
                 </button>
+                <div class="copy-tooltip" id="copyTooltip">Copied!</div>
             </div>
 
-            <div class="strength-meter-container">
-                <div class="strength-meter">
-                    <div class="strength-bar" id="strengthBar"></div>
+            <div class="strength-section">
+                <div class="strength-header">
+                    <span class="entropy-badge" id="entropyBadge">0 bits</span>
+                    <span class="strength-label" id="strengthText">Weak</span>
                 </div>
-                <span class="strength-text" id="strengthText">Weak</span>
+                <div class="strength-meter-segmented">
+                    <div class="segment" id="seg1"></div>
+                    <div class="segment" id="seg2"></div>
+                    <div class="segment" id="seg3"></div>
+                    <div class="segment" id="seg4"></div>
+                </div>
             </div>
 
             <div class="controls-container">
                 <div class="length-control">
-                    <div class="length-header">
-                        <label for="lengthSlider">Character Length</label>
+                    <div class="control-header">
+                        <label for="lengthSlider">Length</label>
                         <span class="length-value" id="lengthValue">16</span>
                     </div>
-                    <input type="range" id="lengthSlider" min="8" max="64" value="16" class="slider">
+                    <input type="range" id="lengthSlider" min="8" max="64" value="16" class="range-slider">
                 </div>
 
                 <div class="options-grid">
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="uppercase" checked>
-                        <span class="checkmark"></span>
-                        <span class="label-text">Uppercase (A-Z)</span>
-                    </label>
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="lowercase" checked>
-                        <span class="checkmark"></span>
-                        <span class="label-text">Lowercase (a-z)</span>
-                    </label>
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="numbers" checked>
-                        <span class="checkmark"></span>
-                        <span class="label-text">Numbers (0-9)</span>
-                    </label>
-                    <label class="checkbox-container">
-                        <input type="checkbox" id="symbols" checked>
-                        <span class="checkmark"></span>
-                        <span class="label-text">Symbols (!@#$%)</span>
-                    </label>
+                    <div class="option-row">
+                        <span class="option-label"><i class="fa-solid fa-font text-purple"></i> Uppercase</span>
+                        <label class="switch">
+                            <input type="checkbox" id="uppercase" checked>
+                            <span class="slider-toggle round"></span>
+                        </label>
+                    </div>
+                    <div class="option-row">
+                        <span class="option-label"><i class="fa-solid fa-a text-white"></i> Lowercase</span>
+                        <label class="switch">
+                            <input type="checkbox" id="lowercase" checked>
+                            <span class="slider-toggle round"></span>
+                        </label>
+                    </div>
+                    <div class="option-row">
+                        <span class="option-label"><i class="fa-solid fa-hashtag text-cyan"></i> Numbers</span>
+                        <label class="switch">
+                            <input type="checkbox" id="numbers" checked>
+                            <span class="slider-toggle round"></span>
+                        </label>
+                    </div>
+                    <div class="option-row">
+                        <span class="option-label"><i class="fa-solid fa-at text-orange"></i> Symbols</span>
+                        <label class="switch">
+                            <input type="checkbox" id="symbols" checked>
+                            <span class="slider-toggle round"></span>
+                        </label>
+                    </div>
+                </div>
+
+                <div class="exclude-control">
+                    <label for="excludeChars">Exclude Characters:</label>
+                    <input type="text" id="excludeChars" placeholder="e.g. iIl1O0" autocomplete="off" spellcheck="false">
                 </div>
             </div>
 
             <button class="primary-btn generate-btn" id="generateBtn">
                 <span>Generate Password</span>
-                <i class="fa-solid fa-bolt"></i>
+                <div class="ripple-container" id="rippleContainer"></div>
             </button>
+        </section>
+
+        <section class="history-panel glass-panel" id="historyPanel">
+            <div class="history-header" id="historyHeader">
+                <h3><i class="fa-solid fa-clock-rotate-left"></i> History</h3>
+                <i class="fa-solid fa-chevron-down toggle-icon" id="historyChevron"></i>
+            </div>
+            <div class="history-content" id="historyContent">
+                <ul class="history-list" id="historyList">
+                    <!-- History items will be injected here -->
+                </ul>
+            </div>
         </section>
     </main>
 
